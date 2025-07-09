@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from "typeorm";
 import { User } from "./User";
 
 @Entity()
@@ -6,22 +6,21 @@ export class Match {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { nullable: false })
   player1!: User;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { nullable: false })
   player2!: User;
 
   @Column()
   sport!: string;
 
-  @Column()
-  result!: string; // 예: 'player1_win', 'player2_win', 'draw'
+  @Column({ default: 'pending' })
+  result!: string;
+
+  @Column({ default: 'requested' })
+  status!: string;
 
   @CreateDateColumn()
-  playedAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
-}
-export { } 
+  createdAt!: Date;
+} 

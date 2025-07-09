@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import { User } from "./entities/User";
 import { Match } from "./entities/Match";
+import { MatchHistory } from "./entities/MatchHistory";
 import { EloHistory } from "./entities/EloHistory";
 import { Post } from "./entities/Post";
 import { Comment } from "./entities/Comment";
@@ -17,6 +18,7 @@ export const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     synchronize: true,
+    dropSchema: true,
     logging: true,
-    entities: [User, Match, EloHistory, Post, Comment, Like, TokenTx],
+    entities: [User, Match, MatchHistory, EloHistory, Post, Comment, Like, TokenTx],
 });
