@@ -22,6 +22,9 @@ export class User {
   @Column({ default: 1000 })
   elo!: number;
 
+  @Column({ default: 0 })
+  token!: number;
+
   @CreateDateColumn()
   createdAt!: Date;
 
