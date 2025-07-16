@@ -12,13 +12,19 @@ export const getAllUserElo = async (_: Request, res: Response) => {
 
 export const getUserEloById = async (req: Request, res: Response) => {
     const entity = await userEloService.getUserEloById(Number(req.params.id));
-    if (!entity) return res.status(404).json({ error: 'Not found' });
+    if (!entity) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+    };
     res.json(entity);
 };
 
 export const updateUserElo = async (req: Request, res: Response) => {
     const entity = await userEloService.updateUserElo(Number(req.params.id), req.body);
-    if (!entity) return res.status(404).json({ error: 'Not found' });
+    if (!entity) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+    };
     res.json(entity);
 };
 

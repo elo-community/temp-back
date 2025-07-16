@@ -18,6 +18,6 @@ export class ReplyComment {
     @JoinColumn({ name: 'user_id' })
     user!: User;
 
-    @Column({ type: 'datetime', name: 'created_at', nullable: false })
+    @Column({ type: 'timestamp', name: 'created_at', nullable: false })
     createdAt!: Date;
 } 

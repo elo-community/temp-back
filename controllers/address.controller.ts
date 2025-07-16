@@ -12,13 +12,19 @@ export const getAllAddress = async (_: Request, res: Response) => {
 
 export const getAddressById = async (req: Request, res: Response) => {
     const entity = await addressService.getAddressById(Number(req.params.id));
-    if (!entity) return res.status(404).json({ error: 'Not found' });
+    if (!entity) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+    };
     res.json(entity);
 };
 
 export const updateAddress = async (req: Request, res: Response) => {
     const entity = await addressService.updateAddress(Number(req.params.id), req.body);
-    if (!entity) return res.status(404).json({ error: 'Not found' });
+    if (!entity) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+    };
     res.json(entity);
 };
 

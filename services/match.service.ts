@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../data-source';
+import { MatchDto } from '../dtos/match.dto';
 import { Match } from '../entities/Match';
 import { MatchHistory } from '../entities/MatchHistory';
 import { User } from '../entities/User';
-import { MatchDto } from '../dtos/match.dto';
 
 const matchRepo = AppDataSource.getRepository(Match);
 const matchHistoryRepo = AppDataSource.getRepository(MatchHistory);
@@ -18,7 +18,7 @@ export const createMatch = async (req: Request, res: Response): Promise<void> =>
             res.status(400).json({ error: 'Invalid player1Id or player2Id' });
             return;
         }
-        const match = matchRepo.create({ player1, player2, sport });
+        const match = matchRepo.create({ user1: player1, user2: player2, sportCategory: sport });
         await matchRepo.save(match);
         // MatchHistory 기록
         const history = matchHistoryRepo.create({ match, action: 'requested', actor: player1 });
@@ -131,7 +131,7 @@ export const setMatchResult = async (req: Request, res: Response): Promise<void>
             res.status(400).json({ error: 'Invalid actorId' });
             return;
         }
-        const history = matchHistoryRepo.create({ match, action: 'result_set', actor, detail: result });
+        const history = matchHistoryRepo.create({ match, action: 'result_set', actor });
         await matchHistoryRepo.save(history);
         res.json(new MatchDto(match));
     } catch (err) {
@@ -157,7 +157,7 @@ export const getMatchHistory = async (req: Request, res: Response): Promise<void
             action: h.action,
             actorId: h.actor.id,
             timestamp: h.timestamp,
-            detail: h.detail,
+            detail: h.detail || null,
         })));
     } catch (err) {
         res.status(500).json({ error: 'Failed to fetch match history', details: err });

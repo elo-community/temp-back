@@ -18,7 +18,7 @@ export class UserElo {
     @Column({ type: 'int', name: 'elo_score', nullable: true })
     eloScore?: number;
 
-    @Column({ type: 'datetime', name: 'updated_at', nullable: true })
+    @Column({ type: 'timestamp', name: 'updated_at', nullable: true })
     updatedAt?: Date;
 
     @Column({ type: 'varchar', length: 255, nullable: true })

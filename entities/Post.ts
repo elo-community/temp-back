@@ -16,10 +16,10 @@ export class Post {
   @Column({ type: 'varchar', length: 255, nullable: true })
   content?: string;
 
-  @Column({ type: 'datetime', name: 'created_at', nullable: false })
+  @Column({ type: 'timestamp', name: 'created_at', nullable: false })
   createdAt!: Date;
 
-  @Column({ type: 'datetime', name: 'updated_at', nullable: false })
+  @Column({ type: 'timestamp', name: 'updated_at', nullable: false })
   updatedAt!: Date;
 
   @Column({ type: 'varchar', length: 255, nullable: true })

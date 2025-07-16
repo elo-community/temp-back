@@ -12,13 +12,19 @@ export const getAllCommentLike = async (_: Request, res: Response) => {
 
 export const getCommentLikeById = async (req: Request, res: Response) => {
     const entity = await commentLikeService.getCommentLikeById(Number(req.params.id));
-    if (!entity) return res.status(404).json({ error: 'Not found' });
+    if (!entity) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+    };
     res.json(entity);
 };
 
 export const updateCommentLike = async (req: Request, res: Response) => {
     const entity = await commentLikeService.updateCommentLike(Number(req.params.id), req.body);
-    if (!entity) return res.status(404).json({ error: 'Not found' });
+    if (!entity) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+    };
     res.json(entity);
 };
 

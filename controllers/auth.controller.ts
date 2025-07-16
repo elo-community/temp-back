@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
-import { User } from "../entities/User";
 import { UserDto } from '../dtos/user.dto';
+import { User } from "../entities/User";
 
 const userRepo = AppDataSource.getRepository(User);
 
 export const register = async (req: Request, res: Response) => {
     try {
         const { email, password, walletAddress, nickname } = req.body;
-        const user = userRepo.create({ email, password, walletAddress, nickname });
+        const user = userRepo.create({ email, password, wallet_address: walletAddress, nickname });
         await userRepo.save(user);
         res.status(201).json(new UserDto(user));
     } catch (err) {

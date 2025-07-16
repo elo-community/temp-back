@@ -19,6 +19,6 @@ export class TokenTx {
   @Column({ type: 'varchar', length: 255, name: 'reason', nullable: false })
   reason!: string;
 
-  @Column({ type: 'datetime', name: 'created_at', nullable: false })
+  @Column({ type: 'timestamp', name: 'created_at', nullable: false })
   createdAt!: Date;
 } 

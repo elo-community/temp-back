@@ -1,13 +1,14 @@
+import * as dotenv from "dotenv";
 import { DataSource } from "typeorm";
-import { User } from "./entities/User";
+import { Comment } from "./entities/Comment";
+import { EloHistory } from "./entities/EloHistory";
+import { Like } from "./entities/Like";
 import { Match } from "./entities/Match";
 import { MatchHistory } from "./entities/MatchHistory";
-import { EloHistory } from "./entities/EloHistory";
 import { Post } from "./entities/Post";
-import { Comment } from "./entities/Comment";
-import { Like } from "./entities/Like";
+import { SportCategory } from "./entities/SportCategory";
 import { TokenTx } from "./entities/TokenTx";
-import * as dotenv from "dotenv";
+import { User } from "./entities/User";
 dotenv.config();
 
 export const AppDataSource = new DataSource({
@@ -20,5 +21,5 @@ export const AppDataSource = new DataSource({
     synchronize: true,
     dropSchema: true,
     logging: true,
-    entities: [User, Match, MatchHistory, EloHistory, Post, Comment, Like, TokenTx],
+    entities: [User, Match, MatchHistory, EloHistory, Post, Comment, Like, TokenTx, SportCategory],
 });

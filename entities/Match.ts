@@ -22,7 +22,7 @@ export class Match {
   @Column({ type: 'varchar', length: 255, nullable: true })
   result?: string;
 
-  @Column({ type: 'datetime', name: 'match_date', nullable: false })
+  @Column({ type: 'timestamp', name: 'match_date', nullable: false })
   matchDate!: Date;
 
   @Column({ type: 'boolean', name: 'is_handicap', nullable: true })

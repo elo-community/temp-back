@@ -12,13 +12,19 @@ export const getAllHate = async (_: Request, res: Response) => {
 
 export const getHateById = async (req: Request, res: Response) => {
     const entity = await hateService.getHateById(Number(req.params.id));
-    if (!entity) return res.status(404).json({ error: 'Not found' });
+    if (!entity) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+    };
     res.json(entity);
 };
 
 export const updateHate = async (req: Request, res: Response) => {
     const entity = await hateService.updateHate(Number(req.params.id), req.body);
-    if (!entity) return res.status(404).json({ error: 'Not found' });
+    if (!entity) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+    };
     res.json(entity);
 };
 

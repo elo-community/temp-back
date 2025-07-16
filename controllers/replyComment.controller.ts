@@ -12,13 +12,19 @@ export const getAllReplyComment = async (_: Request, res: Response) => {
 
 export const getReplyCommentById = async (req: Request, res: Response) => {
     const entity = await replyCommentService.getReplyCommentById(Number(req.params.id));
-    if (!entity) return res.status(404).json({ error: 'Not found' });
+    if (!entity) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+    };
     res.json(entity);
 };
 
 export const updateReplyComment = async (req: Request, res: Response) => {
     const entity = await replyCommentService.updateReplyComment(Number(req.params.id), req.body);
-    if (!entity) return res.status(404).json({ error: 'Not found' });
+    if (!entity) {
+        res.status(404).json({ error: 'Not found' });
+        return;
+    };
     res.json(entity);
 };
 

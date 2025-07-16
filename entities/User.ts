@@ -13,10 +13,13 @@ export class User {
   @Column({ type: 'varchar', length: 255, unique: true, nullable: true })
   nickname?: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ type: 'varchar', length: 255, unique: true, nullable: true })
   email?: string;
 
-  @Column({ type: 'datetime', name: 'created_at', nullable: false })
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  password?: string;
+
+  @Column({ type: 'timestamp', name: 'created_at', nullable: false })
   createdAt!: Date;
 
   @Column({ type: 'decimal', precision: 20, scale: 8, name: 'token_amount', nullable: false })

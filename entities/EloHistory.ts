@@ -23,7 +23,7 @@ export class EloHistory {
   @Column({ type: 'varchar', length: 255, nullable: true })
   reason?: string;
 
-  @Column({ type: 'datetime', name: 'created_at', nullable: false })
+  @Column({ type: 'timestamp', name: 'created_at', nullable: false })
   createdAt!: Date;
 
   @Column({ type: 'int', name: 'elo_before', nullable: true })

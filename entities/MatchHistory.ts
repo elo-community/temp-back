@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Match } from "./Match";
 import { User } from "./User";
 
@@ -18,4 +18,7 @@ export class MatchHistory {
 
     @CreateDateColumn()
     timestamp!: Date;
+
+    @Column({ type: 'json', nullable: true })
+    detail?: Record<string, any>;
 } 
