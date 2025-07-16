@@ -18,7 +18,4 @@ export class MatchHistory {
 
     @CreateDateColumn()
     timestamp!: Date;
-
-    @Column({ nullable: true })
-    detail?: string;
 } 

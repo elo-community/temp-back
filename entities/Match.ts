@@ -1,26 +1,36 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from "typeorm";
-import { User } from "./User";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { SportCategory } from './SportCategory';
+import { User } from './User';
 
-@Entity()
+@Entity('match')
 export class Match {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @ManyToOne(() => User, { nullable: false })
-  player1!: User;
+  @JoinColumn({ name: 'user_id1' })
+  user1!: User;
 
   @ManyToOne(() => User, { nullable: false })
-  player2!: User;
+  @JoinColumn({ name: 'user_id2' })
+  user2!: User;
 
-  @Column()
-  sport!: string;
+  @ManyToOne(() => SportCategory, { nullable: false })
+  @JoinColumn({ name: 'sport_category_id' })
+  sportCategory!: SportCategory;
 
-  @Column({ default: 'pending' })
-  result!: string;
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  result?: string;
 
-  @Column({ default: 'requested' })
-  status!: string;
+  @Column({ type: 'datetime', name: 'match_date', nullable: false })
+  matchDate!: Date;
 
-  @CreateDateColumn()
-  createdAt!: Date;
+  @Column({ type: 'boolean', name: 'is_handicap', nullable: true })
+  isHandicap?: boolean;
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  location?: string;
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  status?: string;
 } 

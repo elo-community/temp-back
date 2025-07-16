@@ -1,25 +1,26 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
-import { User } from "./User";
-import { Post } from "./Post";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Post } from './Post';
+import { User } from './User';
 
-@Entity()
+@Entity('comment')
 export class Comment {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => User)
-  author!: User;
+  @ManyToOne(() => User, { nullable: false })
+  @JoinColumn({ name: 'user_id' })
+  user!: User;
 
-  @ManyToOne(() => Post, (post) => post.comments)
+  @ManyToOne(() => Post, { nullable: false })
+  @JoinColumn({ name: 'post_id' })
   post!: Post;
 
-  @Column()
-  content!: string;
-
-  @CreateDateColumn()
+  @Column({ type: 'datetime', name: 'created_at', nullable: false })
   createdAt!: Date;
 
-  @UpdateDateColumn()
+  @Column({ type: 'datetime', name: 'updated_at', nullable: false })
   updatedAt!: Date;
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  content!: string;
 }
-export { } 

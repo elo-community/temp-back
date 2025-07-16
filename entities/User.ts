@@ -1,37 +1,34 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn } from "typeorm";
-import { EloHistory } from "./EloHistory";
-import { TokenTx } from "./TokenTransaction";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Comment } from './Comment';
+import { Post } from './Post';
 
-@Entity()
+@Entity('user')
 export class User {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ unique: true })
-  email!: string;
+  @Column({ type: 'varchar', length: 255, unique: true, nullable: true })
+  wallet_address?: string;
 
-  @Column()
-  password!: string;
+  @Column({ type: 'varchar', length: 255, unique: true, nullable: true })
+  nickname?: string;
 
-  @Column({ unique: true })
-  walletAddress!: string;
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  email?: string;
 
-  @Column()
-  nickname!: string;
-
-  @Column({ default: 1000 })
-  elo!: number;
-
-  @Column({ default: 0 })
-  token!: number;
-
-  @CreateDateColumn()
+  @Column({ type: 'datetime', name: 'created_at', nullable: false })
   createdAt!: Date;
 
-  @OneToMany(() => EloHistory, (eh) => eh.user)
-  eloHistories!: EloHistory[];
+  @Column({ type: 'decimal', precision: 20, scale: 8, name: 'token_amount', nullable: false })
+  tokenAmount!: number;
 
-  @OneToMany(() => TokenTx, (tt) => tt.user)
-  tokenTransactions!: TokenTx[];
-}
-export { } 
+  @Column({ type: 'varchar', length: 255, name: 'profile_image_url', nullable: true })
+  profileImageUrl?: string;
+
+  // Relations (examples)
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments?: Comment[];
+
+  @OneToMany(() => Post, (post) => post.author)
+  posts?: Post[];
+} 

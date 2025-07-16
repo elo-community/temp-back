@@ -1,29 +1,64 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
-import { User } from "./User";
-import { Comment } from "./Comment";
-import { Like } from "./Like";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Comment } from './Comment';
+import { Like } from './Like';
+import { SportCategory } from './SportCategory';
+import { User } from './User';
 
-@Entity()
+@Entity('post')
 export class Post {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { nullable: false })
+  @JoinColumn({ name: 'author_id' })
   author!: User;
 
-  @Column()
-  content!: string;
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  content?: string;
 
-  @CreateDateColumn()
+  @Column({ type: 'datetime', name: 'created_at', nullable: false })
   createdAt!: Date;
 
-  @UpdateDateColumn()
+  @Column({ type: 'datetime', name: 'updated_at', nullable: false })
   updatedAt!: Date;
 
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  title?: string;
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  body?: string;
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  type?: string;
+
+  @Column({ type: 'boolean', name: 'is_public', nullable: true })
+  isPublic?: boolean;
+
+  @ManyToOne(() => SportCategory, { nullable: false })
+  @JoinColumn({ name: 'sport_category_id' })
+  sportCategory!: SportCategory;
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  location?: string;
+
+  @Column({ type: 'varchar', length: 255, name: 'match_date', nullable: true })
+  matchDate?: string;
+
+  @Column({ type: 'varchar', length: 255, name: 'match_location', nullable: true })
+  matchLocation?: string;
+
+  @Column({ type: 'varchar', length: 255, name: 'match_time', nullable: true })
+  matchTime?: string;
+
+  @Column({ type: 'decimal', precision: 20, scale: 8, name: 'reward_token', nullable: true })
+  rewardToken?: number;
+
+  @Column({ type: 'varchar', length: 255, name: 'valid_until', nullable: true })
+  validUntil?: string;
+
   @OneToMany(() => Comment, (comment) => comment.post)
-  comments!: Comment[];
+  comments?: Comment[];
 
   @OneToMany(() => Like, (like) => like.post)
-  likes!: Like[];
-}
-export { } 
+  likes?: Like[];
+} 

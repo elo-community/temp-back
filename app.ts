@@ -1,11 +1,17 @@
-import "reflect-metadata";
 import * as dotenv from "dotenv";
+import "reflect-metadata";
 
 import express from "express";
 import { AppDataSource } from "./data-source";
-import userRoutes from "./routes/user.routes";
+import addressRoutes from './routes/address.routes';
 import authRoutes from "./routes/auth.routes";
+import commentLikeRoutes from './routes/commentLike.routes';
+import fileRoutes from './routes/file.routes';
+import hateRoutes from './routes/hate.routes';
 import matchRoutes from './routes/match.routes';
+import replyCommentRoutes from './routes/replyComment.routes';
+import userRoutes from "./routes/user.routes";
+import userEloRoutes from './routes/userElo.routes';
 
 
 dotenv.config();
@@ -14,6 +20,12 @@ app.use(express.json());
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use('/api/v1/matches', matchRoutes);
+app.use('/api/user-elo', userEloRoutes);
+app.use('/api/address', addressRoutes);
+app.use('/api/comment-like', commentLikeRoutes);
+app.use('/api/hate', hateRoutes);
+app.use('/api/reply-comment', replyCommentRoutes);
+app.use('/api/file', fileRoutes);
 
 app.get("/", (req, res) => {
     res.send("Server is running!");

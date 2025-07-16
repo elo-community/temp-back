@@ -6,7 +6,7 @@ import { EloHistory } from "./entities/EloHistory";
 import { Post } from "./entities/Post";
 import { Comment } from "./entities/Comment";
 import { Like } from "./entities/Like";
-import { TokenTx } from "./entities/TokenTransaction";
+import { TokenTx } from "./entities/TokenTx";
 import * as dotenv from "dotenv";
 dotenv.config();
 
