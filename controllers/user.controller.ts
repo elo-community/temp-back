@@ -5,16 +5,6 @@ import { User } from "../entities/User";
 
 const userRepo = AppDataSource.getRepository(User);
 
-export const createUser = async (req: Request, res: Response) => {
-    try {
-        const { email, password, walletAddress, nickname } = req.body;
-        const user = userRepo.create({ email, password, wallet_address: walletAddress, nickname });
-        await userRepo.save(user);
-        res.status(201).json(new UserDto(user));
-    } catch (err) {
-        res.status(400).json({ error: "User creation failed", details: err });
-    }
-};
 
 export const getAllUsers = async (_req: Request, res: Response) => {
     const users = await userRepo.find();

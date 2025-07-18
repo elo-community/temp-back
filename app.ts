@@ -9,6 +9,7 @@ import commentLikeRoutes from './routes/commentLike.routes';
 import fileRoutes from './routes/file.routes';
 import hateRoutes from './routes/hate.routes';
 import matchRoutes from './routes/match.routes';
+import postRoutes from './routes/post.routes';
 import replyCommentRoutes from './routes/replyComment.routes';
 import userRoutes from "./routes/user.routes";
 import userEloRoutes from './routes/userElo.routes';
@@ -20,12 +21,13 @@ app.use(express.json());
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/auth", authRoutes);
 app.use('/api/v1/matches', matchRoutes);
-app.use('/api/user-elo', userEloRoutes);
-app.use('/api/address', addressRoutes);
-app.use('/api/comment-like', commentLikeRoutes);
-app.use('/api/hate', hateRoutes);
-app.use('/api/reply-comment', replyCommentRoutes);
-app.use('/api/file', fileRoutes);
+app.use('/api/v1/user-elos', userEloRoutes);
+app.use('/api/v1/addresses', addressRoutes);
+app.use('/api/v1/comment-likes', commentLikeRoutes);
+app.use('/api/v1/hates', hateRoutes);
+app.use('/api/v1/reply-comments', replyCommentRoutes);
+app.use('/api/v1/files', fileRoutes);
+app.use('/api/v1/posts', postRoutes);
 
 app.get("/", (req, res) => {
     res.send("Server is running!");

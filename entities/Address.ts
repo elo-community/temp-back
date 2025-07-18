@@ -15,4 +15,10 @@ export class Address {
     @ManyToOne(() => User, { nullable: false })
     @JoinColumn({ name: 'user_id' })
     user!: User;
+
+    constructor(networkName: string, networkAddress: string, user: User) {
+        this.networkName = networkName;
+        this.networkAddress = networkAddress;
+        this.user = user;
+    }
 } 
