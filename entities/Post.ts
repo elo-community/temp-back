@@ -1,18 +1,17 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Comment } from './Comment';
 import { Like } from './Like';
+import { SportCategory } from './SportCategory';
+import { User } from './User';
 
 @Entity('post')
 export class Post {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  // @ManyToOne(() => User, { nullable: false })
-  // @JoinColumn({ name: 'author_id' })
-  // author!: User;
-
-  @Column({ type: 'varchar', length: 255, nullable: true, default: 0 })
-  authorId!: number;
+  @ManyToOne(() => User, { nullable: false })
+  @JoinColumn({ name: 'author_id' })
+  author!: User;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
   content?: string;
@@ -32,10 +31,9 @@ export class Post {
   @Column({ type: 'boolean', name: 'is_hidden', default: false })
   isHidden?: boolean;
 
-  // @ManyToOne(() => SportCategory, { nullable: false })
-  // @JoinColumn({ name: 'sport_category_id' })
-  @Column({ type: 'varchar', length: 255, nullable: true, default: 0 })
-  sportCategoryId!: number;
+  @ManyToOne(() => SportCategory, { nullable: false })
+  @JoinColumn({ name: 'sport_category_id' })
+  sportCategory!: SportCategory;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
   location?: string;

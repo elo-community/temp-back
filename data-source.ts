@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 import { DataSource } from "typeorm";
 import { Address } from "./entities/Address";
 import { Comment } from "./entities/Comment";
+import { CommentLike } from "./entities/CommentLike";
 import { EloHistory } from "./entities/EloHistory";
 import { Like } from "./entities/Like";
 import { Match } from "./entities/Match";
@@ -22,5 +23,5 @@ export const AppDataSource = new DataSource({
     synchronize: true,
     dropSchema: true,
     logging: true,
-    entities: [User, Address, Match, MatchHistory, EloHistory, Post, Comment, Like, TokenTx, SportCategory],
+    entities: [User, Address, Match, MatchHistory, EloHistory, Post, Comment, CommentLike, Like, TokenTx, SportCategory],
 });

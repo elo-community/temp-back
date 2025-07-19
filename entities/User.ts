@@ -36,7 +36,7 @@ export class User {
   @OneToMany(() => Comment, (comment) => comment.user)
   comments?: Comment[];
 
-  @OneToMany(() => Post, (post) => post.authorId)
+  @OneToMany(() => Post, (post) => post.author)
   posts?: Post[];
 
   addAddress(address: Address) {

@@ -1,11 +1,13 @@
-import { Router } from 'express';
-import * as ctrl from '../controllers/commentLike.controller';
+import { Router } from "express";
+import { CommentLikeController } from "../controllers/commentLike.controller";
 
 const router = Router();
-router.post('/', ctrl.createCommentLike);
-router.get('/', ctrl.getAllCommentLike);
-router.get('/:id', ctrl.getCommentLikeById);
-router.put('/:id', ctrl.updateCommentLike);
-router.delete('/:id', ctrl.deleteCommentLike);
+const controller = new CommentLikeController();
+
+// POST /api/v1/comments/:commentId/likes - 댓글 좋아요 토글
+router.post("/:commentId/likes", (req, res) => { void controller.toggleLike(req, res); });
+
+// GET /api/v1/comments/:commentId/likes - 댓글 좋아요 목록 조회
+router.get("/:commentId/likes", (req, res) => { void controller.getLikesByComment(req, res); });
 
 export default router; 
