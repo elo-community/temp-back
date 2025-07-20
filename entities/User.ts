@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Address } from './Address';
 import { Comment } from './Comment';
-import { Post } from './Post';
+import { Post } from './post/Post';
 
 @Entity('user')
 export class User {
@@ -17,14 +17,14 @@ export class User {
   @Column({ type: 'varchar', length: 255, unique: true, nullable: true })
   email?: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  password?: string;
-
   @CreateDateColumn({ type: 'timestamp', name: 'created_at', nullable: false, default: () => 'CURRENT_TIMESTAMP' })
   createdAt!: Date;
 
   @Column({ type: 'decimal', precision: 20, scale: 8, name: 'token_amount', nullable: true, default: 0 })
   tokenAmount!: number;
+
+  @Column({ type: 'decimal', precision: 20, scale: 8, name: 'available_token', nullable: true, default: 0 })
+  availableToken!: number;
 
   @Column({ type: 'varchar', length: 255, name: 'profile_image_url', nullable: true })
   profileImageUrl?: string;

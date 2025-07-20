@@ -1,9 +1,9 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from '../User';
 import { Post } from './Post';
-import { User } from './User';
 
-@Entity('hate')
-export class Hate {
+@Entity('post_meh')
+export class PostMeh {
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -15,6 +15,6 @@ export class Hate {
     @JoinColumn({ name: 'post_id' })
     post!: Post;
 
-    @Column({ type: 'boolean', name: 'is_hated', nullable: true })
-    isHated?: boolean;
+    @Column({ type: 'boolean', name: 'is_mehed', nullable: true })
+    isMehed?: boolean;
 } 

@@ -1,6 +1,6 @@
 import { AppDataSource } from "../data-source";
 import { Comment } from "../entities/Comment";
-import { Post } from "../entities/Post";
+import { Post } from "../entities/post/Post";
 import { SportCategory } from "../entities/SportCategory";
 import { User } from "../entities/User";
 

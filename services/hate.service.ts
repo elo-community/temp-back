@@ -1,12 +1,12 @@
 import { AppDataSource } from '../data-source';
-import { Hate } from '../entities/Hate';
+import { PostHate } from '../entities/post/PostHate';
 
-const hateRepo = AppDataSource.getRepository(Hate);
+const hateRepo = AppDataSource.getRepository(PostHate);
 
-export const createHate = (data: Partial<Hate>) => hateRepo.save(hateRepo.create(data));
+export const createHate = (data: Partial<PostHate>) => hateRepo.save(hateRepo.create(data));
 export const getAllHate = () => hateRepo.find();
 export const getHateById = (id: number) => hateRepo.findOneBy({ id });
-export const updateHate = async (id: number, data: Partial<Hate>) => {
+export const updateHate = async (id: number, data: Partial<PostHate>) => {
     const entity = await hateRepo.findOneBy({ id });
     if (!entity) return null;
     hateRepo.merge(entity, data);

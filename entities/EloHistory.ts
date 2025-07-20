@@ -1,6 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Match } from './Match';
-import { Post } from './Post';
 import { SportCategory } from './SportCategory';
 import { User } from './User';
 
@@ -35,8 +34,4 @@ export class EloHistory {
   @ManyToOne(() => SportCategory, { nullable: false })
   @JoinColumn({ name: 'sport_category_id' })
   sportCategory!: SportCategory;
-
-  @ManyToOne(() => Post, { nullable: false })
-  @JoinColumn({ name: 'post_id' })
-  post!: Post;
-} 
+}

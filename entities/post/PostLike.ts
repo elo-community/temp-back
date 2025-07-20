@@ -1,9 +1,9 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from '../User';
 import { Post } from './Post';
-import { User } from './User';
 
-@Entity('like')
-export class Like {
+@Entity('post_like')
+export class PostLike {
   @PrimaryGeneratedColumn()
   id!: number;
 

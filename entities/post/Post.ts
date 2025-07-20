@@ -1,8 +1,9 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { Comment } from './Comment';
-import { Like } from './Like';
-import { SportCategory } from './SportCategory';
-import { User } from './User';
+import { Comment } from '../Comment';
+import { SportCategory } from '../SportCategory';
+import { User } from '../User';
+import { PostLike } from './PostLike';
+import { PostMeh } from './PostMeh';
 
 @Entity('post')
 export class Post {
@@ -35,33 +36,12 @@ export class Post {
   @JoinColumn({ name: 'sport_category_id' })
   sportCategory!: SportCategory;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  location?: string;
-
-  @Column({ type: 'varchar', length: 255, name: 'match_date', nullable: true })
-  matchDate?: string;
-
-  @Column({ type: 'varchar', length: 255, name: 'match_location', nullable: true })
-  matchLocation?: string;
-
-  @Column({ type: 'varchar', length: 255, name: 'match_time', nullable: true })
-  matchTime?: string;
-
-  @Column({ type: 'decimal', precision: 20, scale: 8, name: 'reward_token', nullable: true })
-  tokenReward?: number;
-
-  @Column({ type: 'varchar', length: 255, name: 'valid_until', nullable: true })
-  validUntil?: string;
-
-  @Column({ type: 'varchar', length: 255, name: 'elo', nullable: true })
-  elo?: string;
-
-  @Column({ type: 'varchar', length: 255, name: 'preferred_elo', nullable: true })
-  preferredElo?: string;
-
   @OneToMany(() => Comment, (comment) => comment.post)
   comments?: Comment[];
 
-  @OneToMany(() => Like, (like) => like.post)
-  likes?: Like[];
+  @OneToMany(() => PostLike, (like) => like.post)
+  likes?: PostLike[];
+
+  @OneToMany(() => PostMeh, (meh) => meh.post)
+  mehs?: PostMeh[];
 } 

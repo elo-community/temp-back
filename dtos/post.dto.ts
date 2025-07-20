@@ -1,4 +1,4 @@
-import { Post } from '../entities/Post';
+import { Post } from '../entities/post/Post';
 
 export class PostDto {
     id: number;
@@ -8,22 +8,14 @@ export class PostDto {
     isHidden?: boolean;
     createdAt: Date;
     updatedAt: Date;
-    author: {
-        id: number;
-        nickname?: string;
-    };
     sportCategory: {
         id: number;
         name?: string;
     };
-    location?: string;
-    matchDate?: string;
-    matchLocation?: string;
-    matchTime?: string;
-    tokenReward?: number;
-    validUntil?: string;
-    elo?: string;
-    preferredElo?: string;
+    likeCount: number;
+    likedUserIds: number[];
+    mehCount: number;
+    mehedUserIds: number[];
 
     constructor(post: Post) {
         this.id = post.id;
@@ -33,27 +25,25 @@ export class PostDto {
         this.isHidden = post.isHidden;
         this.createdAt = post.createdAt;
         this.updatedAt = post.updatedAt;
-        this.author = {
-            id: post.author.id,
-            nickname: post.author.nickname
-        };
         this.sportCategory = {
-            id: post.sportCategory.id,
-            name: post.sportCategory.name
+            id: post.sportCategory?.id || 0,
+            name: post.sportCategory?.name
         };
-        this.location = post.location;
-        this.matchDate = post.matchDate;
-        this.matchLocation = post.matchLocation;
-        this.matchTime = post.matchTime;
-        this.tokenReward = post.tokenReward;
-        this.validUntil = post.validUntil;
-        this.elo = post.elo;
-        this.preferredElo = post.preferredElo;
+
+        // 좋아요 정보 처리
+        const likedLikes = post.likes?.filter(like => like.isLiked) || [];
+        this.likeCount = likedLikes.length;
+        this.likedUserIds = likedLikes.map(like => like.user?.id || 0).filter(id => id !== 0);
+
+        // Meh 정보 처리
+        const mehedMehs = post.mehs?.filter(meh => meh.isMehed) || [];
+        this.mehCount = mehedMehs.length;
+        this.mehedUserIds = mehedMehs.map(meh => meh.user?.id || 0).filter(id => id !== 0);
     }
 }
 
 export interface PostResponseDto {
-    success: boolean;
+    status: "success" | "error";
     data?: PostDto | PostDto[];
     message?: string;
     error?: string;

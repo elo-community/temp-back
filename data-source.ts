@@ -4,10 +4,11 @@ import { Address } from "./entities/Address";
 import { Comment } from "./entities/Comment";
 import { CommentLike } from "./entities/CommentLike";
 import { EloHistory } from "./entities/EloHistory";
-import { Like } from "./entities/Like";
 import { Match } from "./entities/Match";
 import { MatchHistory } from "./entities/MatchHistory";
-import { Post } from "./entities/Post";
+import { Post } from "./entities/post/Post";
+import { PostLike } from "./entities/post/PostLike";
+import { PostMeh } from "./entities/post/PostMeh";
 import { SportCategory } from "./entities/SportCategory";
 import { TokenTx } from "./entities/TokenTx";
 import { User } from "./entities/User";
@@ -23,5 +24,5 @@ export const AppDataSource = new DataSource({
     synchronize: true,
     dropSchema: true,
     logging: true,
-    entities: [User, Address, Match, MatchHistory, EloHistory, Post, Comment, CommentLike, Like, TokenTx, SportCategory],
+    entities: [User, Address, Match, MatchHistory, EloHistory, Post, Comment, CommentLike, PostLike, PostMeh, TokenTx, SportCategory],
 });

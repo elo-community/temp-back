@@ -15,19 +15,23 @@ class AddressDto {
 
 export class UserDto {
     id: number;
-    email: string;
-    walletAddress: string;
-    nickname: string;
-    token: number;
+    walletAddress?: string;
+    nickname?: string;
+    email?: string;
+    tokenAmount: number;
+    availableToken: number;
+    profileImageUrl?: string;
     createdAt: Date;
     addresses: AddressDto[];
 
     constructor(user: User) {
         this.id = user.id;
-        this.email = user.email || '';
-        this.walletAddress = user.walletAddress || '';
-        this.nickname = user.nickname || '';
-        this.token = user.tokenAmount || 0;
+        this.walletAddress = user.walletAddress;
+        this.nickname = user.nickname;
+        this.email = user.email;
+        this.tokenAmount = user.tokenAmount || 0;
+        this.availableToken = user.availableToken || 0;
+        this.profileImageUrl = user.profileImageUrl;
         this.createdAt = user.createdAt;
         this.addresses = (user.addresses || []).map(addr => new AddressDto(addr));
     }
